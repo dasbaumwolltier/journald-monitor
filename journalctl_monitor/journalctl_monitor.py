@@ -1,3 +1,6 @@
+from typing import List
+
+
 class JournalctlMonitor(object):
     from pathlib import Path
 
@@ -6,6 +9,16 @@ class JournalctlMonitor(object):
 
     def attach_to_journalctl(self):
         ...
+
+    def detach_from_journalctl(self):
+        ...
+
+    def __enter__(self):
+        self.attach_to_journalctl()
+        return self
+
+    def __exit__(self, type, value, traceback):
+        self.detach_from_journalctl()
 
     def __parse_config(self, config_file: Path):
         from pyhocon import ConfigFactory, ConfigTree

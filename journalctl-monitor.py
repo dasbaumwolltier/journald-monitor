@@ -11,8 +11,8 @@ def main():
 
     args = parser.parse_args()
 
-    journalctl_monitor = JournalctlMonitor(Path(args.config))
-    journalctl_monitor.attach_to_journalctl()
+    with JournalctlMonitor.create(args.config) as monitor:
+        monitor.process_logs()
 
 if __name__ == '__main__':
     main()

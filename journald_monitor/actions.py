@@ -14,14 +14,15 @@ def send_telegram_message(config: ConfigTree, line: str, message: str, config_nu
     return response.json()
 
 def send_matrix_message(config: ConfigTree, line: str, message: str, config_number: int) -> str:
-    from matrix_client.api import MatrixHttpApi, MatrixHttpLibError
+    from matrix_client.client import MatrixClient, Room, MatrixRequestError
 
     used_config = config.get('matrix.configs')[config_number]
-    client = MatrixHttpApi(used_config.url, token=used_config.token)
+    client = MatrixClient(used_config.url, token=used_config.token, user_id=used_config.user_id)
 
     log.debug('Sending message "%s" to room "%s" on server "%s"', message, used_config.room_id, used_config.url)
 
     try:
-        return client.send_message(used_config.room_id, message)
-    except MatrixHttpLibError:
+        room: Room = client.get_rooms()[used_config.room_id]
+        return room.send_html(message)
+    except MatrixRequestError:
         return None

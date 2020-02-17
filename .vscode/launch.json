@@ -11,7 +11,7 @@
             "program": "${workspaceRoot}/journald-monitor.py",
             "args": [
                 "-c",
-                "test.conf"
+                "config.conf"
             ],
             "console": "integratedTerminal"
         }

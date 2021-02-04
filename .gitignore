@@ -210,3 +210,5 @@ $RECYCLE.BIN/
 
 .vscode/settings.json
 config.conf
+config.yaml
+config.yml

@@ -1,5 +1,5 @@
 # JournalD Monitor
-This is a small package written in Python, which attaches itself to the ``journalctl -f`` command and matches the lines against a list of regexes. It then executes the actions corresponding to the regexes.
+This is a small package written in Python, which attaches itself to the ``journalctl -f`` command and lets triggers run on every line, and then, if the trigger fires, executes various actions specified in the config. This program can be used to, for example, notify the admin if a particular sign of failure (e.g. Postfix not accepting email) occurs, or to create simple statistics in a database about how many SSH login tries have there been and what is the most tried out username.
 
 ## Commandline Options
 
